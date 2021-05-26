@@ -18,7 +18,7 @@ jobs:
     steps:
       - run: |
         curl -X POST \
-        --data-urlencode 'payload={ \
+        --data-urlencode 'payload={
           "channel": "{{ github.event.inputs.channel }}",
           "text": "{{ github.event.inputs.message }}"
         }' \
