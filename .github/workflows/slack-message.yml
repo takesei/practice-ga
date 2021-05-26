@@ -17,5 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-        curl -X POST --data-urlencode "payload={ \"channel\": \"{{ github.event.inputs.channel }}\", \"text\": \"{{ github.event.inputs.message }}\"}" https://hooks.slack.com/services/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
-
+          curl -X POST \
+          --data-urlencode 'payload={
+            "channel": "{{ github.event.inputs.channel }}",
+            "text": "{{ github.event.inputs.message }}"
+          }' \
+          {{secrets.SLACK_WEBHOOK_URL}}
