@@ -1,4 +1,4 @@
-name: Sent Messaget to slack
+name: Post Message to Slack
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
       - run: |
           curl -X POST \
           --data-urlencode 'payload={
-            "channel": "{{ github.event.inputs.channel }}",
-            "text": "{{ github.event.inputs.message }}"
+            "channel": "${{ github.event.inputs.channel }}",
+            "text": "${{ github.event.inputs.message }}"
           }' \
-          {{secrets.SLACK_WEBHOOK_URL}}
+          ${{ secrets.SLACK_WEBHOOK_URL }}
