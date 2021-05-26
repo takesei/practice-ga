@@ -1,0 +1,27 @@
+name: Sent Messaget to slack
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'Posting Channel'
+        required: true
+        default: '#z-debug-webhook'
+      message:
+        description: 'Sending Message'
+        required: true
+        default: 'ping!'
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        curl -X POST \
+        --data-urlencode \
+        "payload={ \
+        \"channel\": \"{{ github.event.inputs.channel }}\", \
+        \"text\": \"{{ github.event.inputs.message }}\" \
+        }" \
+        https://hooks.slack.com/services/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
+
