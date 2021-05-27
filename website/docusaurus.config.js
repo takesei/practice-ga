@@ -12,6 +12,7 @@ module.exports = {
   themeConfig: {
     navbar: {
       title: 'My Site',
+      hideOnScroll: true,
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
@@ -19,14 +20,37 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'intro',
+          docId: 'tutorials/intro',
           position: 'left',
           label: 'Tutorial',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'doc',
+          docId: 'subetedoc/intro',
+          position: 'left',
+          label: 'Subete Doc',
+        },
+        {
+          label: 'Blog',
+          position: 'left',
+          items: [
+            {
+              label: 'Yurufuwa Blog',
+              to: 'blog'
+            },
+            {
+              label: 'Tech Blog',
+              to: 'blog',
+            }
+          ],
+        },
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
+          position: 'right',
+        },
+        {
+          type: 'search',
           position: 'right',
         },
       ],
@@ -39,7 +63,7 @@ module.exports = {
           items: [
             {
               label: 'Tutorial',
-              to: '/docs/intro',
+              to: 'blog',
             },
           ],
         },
@@ -64,8 +88,8 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Yurufuwa Blog',
+              to: 'blog',
             },
             {
               label: 'GitHub',
@@ -84,18 +108,35 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
+          routeBasePath: 'docs',
           editUrl:
             'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         blog: {
+          id: "preset-classic-1",
           showReadingTime: true,
+          id: 'blog',
+          path: "./blog/yurufuwablog",
+          routeBasePath: 'blog',
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+          'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        showReadingTime: true,
+        id: 'techblog',
+        path: "./blog/techblopg",
+        routeBasePath: 'techblog',
+        // Please change this to your repo.
+        editUrl:
+        'https://github.com/facebook/docusaurus/edit/master/website/blog/',
       },
     ],
   ],

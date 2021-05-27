@@ -26,8 +26,8 @@ RUN mkdir docs blog && \
     jq ".target.blog | .[]" $WEBSITE_TARGET_DIRECTORY \
       | xargs -I {} mv {} blog
 
-# RUN yarn run build && \
-#     yarn cache clean
+RUN yarn run build && \
+    yarn cache clean
 
 ENV PORT=80
 ENV HOST=0.0.0.0
