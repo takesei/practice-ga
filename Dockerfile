@@ -9,7 +9,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
-ENV WORKDIR=/app
+ENV WORKDIR=/app/
 WORKDIR ${WORKDIR}
 
 ARG WEBSITE_DIRECTORY=website
