@@ -1,8 +1,12 @@
 {
   "target": {
     "docs": [
-      "instruction"
+      "subetedoc",
+      "tutorials"
     ],
-    "blog": []
+    "blog": [
+      "techblog",
+      "yurufuwablog"
+    ]
   }
 }

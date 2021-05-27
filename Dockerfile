@@ -8,28 +8,26 @@ RUN apt-get update && \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV WORKDIR /app/
 
+ENV WORKDIR=/app
 WORKDIR ${WORKDIR}
 
-COPY ./website/yarn.lock ./website/package.json ${WORKDIR}
-
+ARG WEBSITE_DIRECTORY=website
+COPY ${WEBSITE_DIRECTORY}/yarn.lock ${WEBSITE_DIRECTORY}/package.json ${WORKDIR}
 RUN yarn install --frozen-lockfile
 
-COPY ./ $WORKDIR
+ARG WEBSITE_TARGET_DIRECTORY="website.config.json"
+COPY . $WORKDIR
+RUN mv -f ${WEBSITE_DIRECTORY}/* . && \
+    rm -rf ${WEBSITE_DIRECTORY}
+RUN mkdir docs blog && \
+    jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
+      | xargs -I {} mv {} docs && \
+    jq ".target.blog | .[]" $WEBSITE_TARGET_DIRECTORY \
+      | xargs -I {} mv {} blog
 
-RUN mv -f ./website/* ./ && \
-    rm -rf ./website
-
-RUN echo ${ARG} && \
-    cat ${ARG}
-
-RUN yarn run build && \
-    yarn cache clean
-
-ARG WEBSITE_TARGET_DIRECTORY=website.config.json
-RUN jq ".target.docs | .[]" website.config.json \
-    | xargs -I {} sh -c "mv -f {}/* ./docs && rm -rf {}"
+# RUN yarn run build && \
+#     yarn cache clean
 
 ENV PORT=80
 ENV HOST=0.0.0.0
