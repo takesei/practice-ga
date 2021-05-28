@@ -10,6 +10,11 @@ module.exports = {
   organizationName: 'takesei', // Usually your GitHub org/user name.
   projectName: 'tech-stats', // Usually your repo name.
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
+      additionalLanguages: ['python', 'julia', 'r', 'md']
+    },
     navbar: {
       title: 'My Site',
       hideOnScroll: true,
