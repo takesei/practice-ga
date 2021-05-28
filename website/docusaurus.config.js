@@ -25,13 +25,13 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'culNetSensor/intro',
+          docId: 'CulNetSensor/intro',
           position: 'left',
           label: 'CulNet-Sensor',
         },
         {
           type: 'doc',
-          docId: 'straAnalysis/intro',
+          docId: 'StraAnalysis/intro',
           position: 'left',
           label: 'Stra-Analysis',
         },
