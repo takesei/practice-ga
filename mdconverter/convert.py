@@ -4,7 +4,7 @@ import sys
 arg = ['dummy.ipynb', './', './fig']
 _arg = sys.argv
 
-assert len(_arg) >= 2, f'Arguments must be [TARGET, OUTPUT_DIR, FIG_DIR], got {_arg[1:]}'
+assert len(_arg) >= 2, f'Arguments must be [TARGET, OUTPUT_DIR, FIG_DIR_NAME], got {_arg[1:]}'
 
 for idx, i in enumerate(_arg[1:]):
     arg[idx] = i

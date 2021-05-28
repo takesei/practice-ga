@@ -40,7 +40,7 @@ class IPythonMD():
             'raw'     : parse_raw(nb['metadata'], self.template['raw'])
         }
 
-        os.makedirs(fig_dir, exist_ok=True)
+        os.makedirs(fig_dir_name, exist_ok=True)
 
         temp = '\n'.join([self.parse_cell(i) for i in nb['cells']])
         with open(f'{output_dir}/{os.path.basename(target).split(".")[0]}.md', 'w') as f:
