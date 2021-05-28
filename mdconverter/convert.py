@@ -11,4 +11,4 @@ for idx, i in enumerate(_arg[1:]):
 
 
 parser = IPythonMD()
-parser.convert_nb(target=arg[0], output_dir=arg[1], fig_dir=arg[2])
+parser.convert_nb(target=arg[0], output_dir=arg[1], fig_dir_name=arg[2])
