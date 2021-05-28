@@ -14,6 +14,6 @@ COPY . $WORKDIR
 
 ENV TARGET ./input/report.ipynb
 ENV OUTPUT_DIR ./output
-ENV FIG_DIR ./output/fig
+ENV FIG_DIR_NAME ./fig
 
-CMD ["sh", "-c", "python convert.py $TARGET $OUTPUT_DIR $FIG_DIR"]
+CMD ["sh", "-c", "python convert.py $TARGET $OUTPUT_DIR $FIG_DIR_NAME"]

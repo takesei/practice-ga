@@ -4,12 +4,12 @@ from typing import Dict, Any
 import jinja2
 
 
-def parse_code(meta: Dict[str, Any], template:jinja2.environment.Template, output_dir='fig'):
+def parse_code(meta: Dict[str, Any], template: jinja2.environment.Template, fig_dir_name='fig'):
     lang = meta['language_info']['name']
     style_css = re.compile(r"""<style(".*?"|'.*?'|[^'"])*?>.*?<\/style>""")
     style_inline_css = re.compile(r'style=".*?"')
     ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-    
+
     def inner(cell: Dict[str, Any]):
         source = cell['source']
         outputs = cell['outputs']
@@ -26,20 +26,20 @@ def parse_code(meta: Dict[str, Any], template:jinja2.environment.Template, outpu
         }
         counter = 0
         for i in outputs:
-            if 'name' in i.keys() :
+            if 'name' in i.keys():
                 arg[f'{i["name"]}_batch'].append(''.join(i['text']))
             elif 'ename' in i.keys():
                 tr = '\n'.join(i['traceback']).replace('<', '\<').replace('>', '\>')
                 val = i['evalue'].replace('<', '\<').replace('>', '\>')
                 arg['error'].append(
-                    {'ename':i['ename'], 'evalue':val, 'traceback':ansi_escape.sub('', tr)}
+                    {'ename': i['ename'], 'evalue': val, 'traceback': ansi_escape.sub('', tr)}
                 )
             elif 'data' in i.keys():
                 temp = i['data']
                 if 'text/plain' in temp.keys():
                     arg['text_plain_batch'].append(''.join(temp['text/plain']))
                 if 'image/png' in temp.keys():
-                    name = f'{output_dir}/{execution_count}-{counter}.png'
+                    name = f'{fig_dir_name}/{execution_count}-{counter}.png'
                     with open(name, 'wb') as f:
                         f.write(base64.b64decode(temp['image/png']))
                     counter += 1
@@ -54,7 +54,7 @@ def parse_code(meta: Dict[str, Any], template:jinja2.environment.Template, outpu
                         inline_css = [tuple(i.split(':')) for i in hit]
                         new_css = ','.join([f'{snake_to_camel(k)}:"{v.strip()}"' for k, v in inline_css])
                         html = list(html)
-                        html[i.start():i.end()] = 'style={{' + new_css +'}}'
+                        html[i.start():i.end()] = 'style={{' + new_css + '}}'
                         html = ''.join(html)
                     arg['text_html'].append(html)
             else:
