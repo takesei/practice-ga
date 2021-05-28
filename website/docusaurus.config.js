@@ -13,7 +13,7 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
-      additionalLanguages: ['python', 'julia', 'r', 'md']
+      additionalLanguages: ['python', 'julia', 'r', 'markdown']
     },
     navbar: {
       title: 'My Site',
