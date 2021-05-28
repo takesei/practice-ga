@@ -29,12 +29,12 @@ def parse_code(meta: Dict[str, Any], template: jinja2.environment.Template, fig_
             if 'name' in i.keys():
                 arg[f'{i["name"]}_batch'].append(
                     ''.join(i['text']
-                ).replace('<', '&lt;').replace('>', '&gt;'))
+                ).replace('<', '&lt;').replace('>', '&gt;')
             elif 'ename' in i.keys():
                 tr = '\n'.join(
                     i['traceback']
-                ).replace('<', '&lt;').replace('>', '&gt;'))
-                val = i['evalue'].replace('<', '&lt;').replace('>', '&gt;'))
+                ).replace('<', '&lt;').replace('>', '&gt;')
+                val = i['evalue'].replace('<', '&lt;').replace('>', '&gt;')
                 arg['error'].append(
                     {'ename': i['ename'], 'evalue': val, 'traceback': ansi_escape.sub('', tr)}
                 )
@@ -43,7 +43,7 @@ def parse_code(meta: Dict[str, Any], template: jinja2.environment.Template, fig_
                 if 'text/plain' in temp.keys():
                     arg['text_plain_batch'].append(
                             ''.join(temp['text/plain']
-                    ).replace('<', '&lt;').replace('>', '&gt;'))
+                    ).replace('<', '&lt;').replace('>', '&gt;')
                 if 'image/png' in temp.keys():
                     name = f'{fig_dir_name}/{execution_count}-{counter}.png'
                     with open(name, 'wb') as f:
