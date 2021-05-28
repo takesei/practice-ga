@@ -10,10 +10,7 @@
 ```
 :::
 {% endfor %}
-{% endif %}
-
-
-{% if stderr_batch != [] %}
+{% endif %}{% if stderr_batch != [] %}
 {% for err in stderr_batch %}
 :::caution STDERR
 ```text
@@ -21,9 +18,7 @@
 ```
 :::
 {% endfor %}
-{% endif %}
-
-{% if error != [] %}
+{% endif %}{% if error != [] %}
 {% for e in error %}
 :::danger {{ e.ename }}
 > {{ e.evalue }}
@@ -35,30 +30,31 @@
 {% endfor %}
 {% endif %}
 
-
 {% if text_plain_batch != [] %}
 {% for txt in text_plain_batch %}
 :::note Out
-```text
+<details>
+<summary>Details</summary>
+<span class='token-line'>
 {{ txt }}
-```
+</span>
+</details>
 :::
 {% endfor %}
 {% endif %}
-
 
 {% if image_png != [] %}
 {% for img in image_png %}
-:::note Out
+:::note Image
 ![{{ img|safe }}]({{ img|safe }})
 :::
 {% endfor %}
-{% endif %}
-
-{% if text_html != [] %}
+{% endif %}{% if text_html != [] %}
 {% for html in text_html %}
-:::note Out
+:::note HTML
 {{ html }}
 :::
 {% endfor %}
 {% endif %}
+
+---
