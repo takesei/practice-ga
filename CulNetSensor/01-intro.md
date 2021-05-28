@@ -1,4 +1,8 @@
-# Tutorial Intro
+---
+slug: /
+---
+
+# Culnet Sensor Intro
 
 Let's discover **Docusaurus in less than 5 minutes**.
 

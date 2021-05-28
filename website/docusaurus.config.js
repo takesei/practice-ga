@@ -13,7 +13,7 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/dracula'),
-      additionalLanguages: ['python', 'julia', 'r', 'md']
+      additionalLanguages: ['python', 'julia', 'r', 'markdown']
     },
     navbar: {
       title: 'My Site',
@@ -25,29 +25,15 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'tutorials/intro',
+          docId: 'CulNetSensor/intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'CulNet-Sensor',
         },
         {
           type: 'doc',
-          docId: 'subetedoc/intro',
+          docId: 'StraAnalysis/intro',
           position: 'left',
-          label: 'Subete Doc',
-        },
-        {
-          label: 'Blog',
-          position: 'left',
-          items: [
-            {
-              label: 'Yurufuwa Blog',
-              to: 'blog'
-            },
-            {
-              label: 'Tech Blog',
-              to: 'blog',
-            }
-          ],
+          label: 'Stra-Analysis',
         },
         {
           href: 'https://github.com/facebook/docusaurus',
@@ -63,15 +49,6 @@ module.exports = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: 'blog',
-            },
-          ],
-        },
         {
           title: 'Community',
           items: [
@@ -93,10 +70,6 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Yurufuwa Blog',
-              to: 'blog',
-            },
-            {
               label: 'GitHub',
               href: 'https://github.com/facebook/docusaurus',
             },
@@ -113,35 +86,13 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          routeBasePath: 'docs',
+          routeBasePath: '/',
           editUrl:
             'https://github.com/facebook/docusaurus/edit/master/website/',
-        },
-        blog: {
-          id: "preset-classic-1",
-          showReadingTime: true,
-          id: 'blog',
-          path: "./blog/yurufuwablog",
-          routeBasePath: 'blog',
-          // Please change this to your repo.
-          editUrl:
-          'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-blog',
-      {
-        showReadingTime: true,
-        id: 'techblog',
-        path: "./blog/techblopg",
-        routeBasePath: 'techblog',
-        // Please change this to your repo.
-        editUrl:
-        'https://github.com/facebook/docusaurus/edit/master/website/blog/',
       },
     ],
   ],

@@ -20,11 +20,9 @@ ARG WEBSITE_TARGET_DIRECTORY="website.config.json"
 COPY . $WORKDIR
 RUN mv -f ${WEBSITE_DIRECTORY}/* . && \
     rm -rf ${WEBSITE_DIRECTORY}
-RUN mkdir docs blog && \
+RUN mkdir docs && \
     jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
-      | xargs -I {} mv {} docs && \
-    jq ".target.blog | .[]" $WEBSITE_TARGET_DIRECTORY \
-      | xargs -I {} mv {} blog
+      | xargs -I {} mv {} docs
 
 RUN yarn run build && \
     yarn cache clean

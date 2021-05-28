@@ -1,12 +1,8 @@
 {
   "target": {
     "docs": [
-      "subetedoc",
-      "tutorials"
-    ],
-    "blog": [
-      "techblog",
-      "yurufuwablog"
+      "CulNetSensor",
+      "StraAnalysis"
     ]
   }
 }
