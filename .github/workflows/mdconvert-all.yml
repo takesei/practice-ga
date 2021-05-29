@@ -28,7 +28,7 @@ jobs:
       - name: Install Dependencies in Pipfile
         working-directory: ./mdconverter
         run: |
-          pip install --no-cahce-dir pipenv
+          pip install --no-cache-dir pipenv
           pipenv install --system --deploy
           pip uninstall -y pipenv virtualenv-clone virtualenv
       - name: Convert Notebook into Markdown
