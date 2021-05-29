@@ -40,9 +40,8 @@ jobs:
           pip uninstall -y pipenv virtualenv-clone virtualenv
       - name: Create WebSite Structure
         run: |
-          mkdir website/docs
-          jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
-          | xargs -I {} cp -r {} website/docs
+          mkdir website/docs 
+          jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} cp -r {} website/docs
       - name: Convert Notebook into Markdown
         run: |
           python mdconverter/convert.py \
