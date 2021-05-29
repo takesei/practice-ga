@@ -2,7 +2,8 @@
   "target": {
     "docs": [
       "CulNetSensor",
-      "StraAnalysis"
+      "StraAnalysis",
+      "AnalysisReport"
     ]
   }
 }

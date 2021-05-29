@@ -1,5 +1,4 @@
-FROM node:16-slim
-
+FROM python:3.9-slim as conv
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -8,6 +7,31 @@ RUN apt-get update && \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app/
+
+COPY ./mdconverter/Pipfile ./mdconverter/Pipfile.lock /app/
+
+RUN pip install pipenv --no-cache-dir && \
+    pipenv install --system --deploy && \
+    pip uninstall -y pipenv virtualenv-clone virtualenv
+
+COPY . /app/
+
+ARG WEBSITE_TARGET_DIRECTORY="website.config.json"
+RUN mkdir target
+RUN jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
+    | xargs -I {} cp -r {} target/
+RUN python mdconverter/convert.py target target fig
+
+
+FROM node:16-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    git \
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV WORKDIR=/app/
 WORKDIR ${WORKDIR}
@@ -17,6 +41,8 @@ COPY ${WEBSITE_DIRECTORY}/yarn.lock ${WEBSITE_DIRECTORY}/package.json ${WORKDIR}
 RUN yarn install --frozen-lockfile
 
 COPY $WEBSITE_DIRECTORY $WORKDIR
+RUN rm -rf docs/
+COPY --from=conv /app/target/ /app/docs/
 
 RUN yarn run build && \
     yarn cache clean
