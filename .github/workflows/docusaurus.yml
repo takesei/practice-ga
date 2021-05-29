@@ -24,7 +24,7 @@ jobs:
       #     yarn install --frozen-lockfile
       #     yarn run build
       - name: Create SSH Connection
-        uses: webfactory/ssh-agent@v0.5.0
+        uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
       - name: Release to GitHub Pages
