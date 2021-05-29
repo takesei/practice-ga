@@ -49,7 +49,7 @@ jobs:
         run: |
           RUN find . -type f \
           | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
-          | xargs -I {} rm -f {}
+          | xargs -I {} sh -c "echo {} && rm -f {}"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
