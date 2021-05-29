@@ -41,10 +41,8 @@ jobs:
       - name: Create WebSite Structure
         run: |
           mkdir website/docs
-          echo $WEBSITE_TARGET_DIRECTORY
-          jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} echo {}
-          jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} cp -r {} website/docs
-          tree ./website
+          jq ".target.docs | .[]" ${{WEBSITE_TARGET_DIRECTORY}} | xargs -I {} echo {}
+          jq ".target.docs | .[]" ${{WEBSITE_TARGET_DIRECTORY}} | xargs -I {} cp -r {} website/docs
       - name: Convert Notebook into Markdown
         run: |
           python mdconverter/convert.py \
