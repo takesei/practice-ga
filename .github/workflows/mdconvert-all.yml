@@ -49,7 +49,12 @@ jobs:
             ${{ github.event.inputs.target }} \
             ${{ github.event.inputs.output_dir }} \
             ${{ github.event.inputs.fig_dir_name }}
+      - name: Remove Unnecessary files (but markdown, gif, jpg, png)
+        run: |
+          RUN find docs -type f \
+          | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
+          | xargs -I {} rm -f {}
       - name: Get List
         run: |
           sudo apt install tree
-          tree ./website
+          tree .

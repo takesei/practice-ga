@@ -22,6 +22,10 @@ RUN mkdir target
 RUN jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
     | xargs -I {} cp -r {} target/
 RUN python mdconverter/convert.py target target fig
+RUN find target -type f \
+    | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
+    | xargs -I {} rm -f {}
+
 
 
 FROM node:16-slim
