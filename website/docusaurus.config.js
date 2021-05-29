@@ -13,7 +13,7 @@ module.exports = {
   title: 'Sample Tech Stats Website',
   tagline: 'Dinosaurs are cool',
   url: 'https://takesei.github.io',
-  baseUrl: '/',
+  baseUrl: '/tech-stats',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
