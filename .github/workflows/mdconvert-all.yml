@@ -47,7 +47,7 @@ jobs:
       - name: Remove Unnecessary files (but markdown, gif, jpg, png)
         working-directory: ./website/docs
         run: |
-          RUN find . -type f \
+          find . -type f \
           | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
           | xargs -I {} sh -c "echo {} && rm -f {}"
       - name: Create Pull Request
