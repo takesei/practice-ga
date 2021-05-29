@@ -57,6 +57,9 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: gh-actions <actions@github.com>
           branch: docs/build-docsaurus
+          labels: |
+            docsaurus
+            automerge
           branch-suffix: short-commit-hash
           delete-branch: true
           title: "[${{github.run_id}}] Changes by create-pull-request action"
