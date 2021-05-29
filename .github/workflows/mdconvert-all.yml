@@ -13,7 +13,7 @@ on:
       fig_dir_name:
         description: 'Name of Figure Directory'
         required: true
-        deafult: 'fig'
+        default: 'fig'
 
 jobs:
   build:
@@ -28,7 +28,7 @@ jobs:
       - name: Install Dependencies in Pipfile
         working-directory: ./mdconverter
         run: |
-          pip install pipenv --no-cahce-dir
+          pip install --no-cahce-dir pipenv
           pipenv install --system --deploy
           pip uninstall -y pipenv virtualenv-clone virtualenv
       - name: Convert Notebook into Markdown
