@@ -55,13 +55,13 @@ jobs:
         with:
           commit-message: Build docsaurus document, ${{github.run_id}}:${{github.run_number}}
           committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: docs/${{ github.run_id }}
-          branch-suffix: timestamp
+          author: gh-actions <actions@github.com>
+          branch: docs/build-docsaurus
+          branch-suffix: short-commit-hash
           delete-branch: true
           title: "[docs/${{ github.run_id }}] Changes by create-pull-request action"
           body: |
-            @${{ github.actor }}
+            Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
             ```
             Build new document
             ```
