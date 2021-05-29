@@ -36,6 +36,6 @@ run-mdconverter:
 	@docker run --rm -i -t \
 		--name proc-mdconverter \
 		-v `pwd`/AnalysisReport:/app/input \
-		-v `pwd`/website/docs/AnalysisReport:/app/output/ \
+		-v `pwd`/AnalysisReport:/app/output \
 		mdconverter \
 		$(cmd)
