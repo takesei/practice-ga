@@ -32,10 +32,9 @@ jobs:
           jq ".target.docs | .[]" ${{ github.event.inputs.website_config_file }} \
            | xargs -I {} cp -r {} website/docs
       - name: Convert Notebook into Markdown
-        working-directory: ./website/docs
         env:
-          TARGET: ./
-          OUTPUT_DIR: ./
+          TARGET: ./website/docs
+          OUTPUT_DIR: ./website/docs
           FIG_DIR_NAME: fig
         run: |
           python mdconverter/convert.py \
