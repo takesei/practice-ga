@@ -8,9 +8,6 @@ const getDocsDirs = () => {
     .filter(v => v !== null);
 }
 
-module.exports = {
-};
-
 
 module.exports = {
   title: 'Sample Tech Stats Website',
