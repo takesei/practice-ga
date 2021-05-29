@@ -53,13 +53,13 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: Build docsaurus document, ${{github.run_id}}:${{github.run_number}}
+          commit-message: ":notebook_with_decorative_cover: Build docsaurus document, ${{github.run_id}}"
           committer: GitHub <noreply@github.com>
           author: gh-actions <actions@github.com>
           branch: docs/build-docsaurus
           branch-suffix: short-commit-hash
           delete-branch: true
-          title: "[docs/${{ github.run_id }}] Changes by create-pull-request action"
+          title: "[${{github.run_id}}] Changes by create-pull-request action"
           body: |
             Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
             ```
