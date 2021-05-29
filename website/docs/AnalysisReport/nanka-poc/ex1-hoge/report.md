@@ -75,7 +75,7 @@ lib.multiplot(data)
 
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
 &lt;Figure size 576x324 with 10 Axes&gt;
 </span>
