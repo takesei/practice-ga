@@ -1,0 +1,4 @@
+# Usage: <package-name> == <version>
+# Ex: protobuf == 3.2.0rc
+
+numpy == 1.20.3
