@@ -28,6 +28,9 @@ jobs:
           pip uninstall -y pipenv virtualenv-clone virtualenv
       - name: Create WebSite Structure
         run: |
+          if [ -e website/docs ]; then
+          rm -rf website/docs
+          fi
           mkdir website/docs
           jq ".target.docs | .[]" ${{ github.event.inputs.website_config_file }} \
            | xargs -I {} cp -r {} website/docs
@@ -47,7 +50,18 @@ jobs:
           RUN find . -type f \
           | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
           | xargs -I {} rm -f {}
-      - name: Get List
-        run: |
-          sudo apt install tree
-          tree .
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Build docsaurus document, ${{github.run_id}}:${{github.run_number}}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: docs/${{ github.run_id }}
+          branch-suffix: timestamp
+          delete-branch: true
+          title: [docs/${{ github.run_id }}] Changes by create-pull-request action
+          body: |
+            @${{ github.actor }}
+            ```
+            Build new document
+            ```
