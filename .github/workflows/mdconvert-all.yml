@@ -1,0 +1,43 @@
+name: Convert All of the IPython Notebooks into Markdown
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target File (end with .ipynb)/ Directory'
+        required: true
+        default: 'report'
+      output_dir:
+        description: 'Output dir'
+        required: true
+        default: 'website/docs'
+      fig_dir_name:
+        description: 'Name of Figure Directory'
+        required: true
+        deafult: 'fig'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Contents in Repo
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+          with:
+            python-version: "3.7.4"
+      - name: Install Dependencies in Pipfile
+        working-directory: ./mdconverter
+        run: |
+          pip install pipenv --no-cahce-dir
+          pipenv install --system --deploy
+          pip uninstall -y pipenv virtualenv-clone virtualenv
+      - name: Convert Notebook into Markdown
+        run: |
+          python mdconverter/convert.py \
+            ${{ github.event.inputs.target }} \
+            ${{ github.event.inputs.output_dir }} \
+            ${{ github.event.inputs.fig_dir_name }}
+      - name: Get List
+        run: |
+          sudo apt install tree
+          tree .
