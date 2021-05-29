@@ -42,6 +42,7 @@ jobs:
         run: |
           mkdir website/docs
           jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} cp -r {} website/docs
+          tree ./website
       - name: Convert Notebook into Markdown
         run: |
           python mdconverter/convert.py \
@@ -51,4 +52,4 @@ jobs:
       - name: Get List
         run: |
           sudo apt install tree
-          tree .
+          tree ./website
