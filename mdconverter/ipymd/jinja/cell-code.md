@@ -34,7 +34,7 @@
 {% for txt in text_plain_batch %}
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
 {{ txt }}
 </span>
