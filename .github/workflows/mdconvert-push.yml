@@ -1,0 +1,18 @@
+name: Hello World!
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'World'
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Hello ${{ github.event.inputs.name }}!"
+          echo "Payload"
+          cat $GITHUB_EVENT_PATH
+          echo "Task DONE"

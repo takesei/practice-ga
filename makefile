@@ -35,7 +35,7 @@ run-docusaurus-docker:
 run-mdconverter:
 	@docker run --rm -i -t \
 		--name proc-mdconverter \
-		-v `pwd`/report:/app/input \
-		-v `pwd`/mdconverter/output:/app/output/ \
+		-v `pwd`/AnalysisReport:/app/input \
+		-v `pwd`/AnalysisReport:/app/output \
 		mdconverter \
 		$(cmd)

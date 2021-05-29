@@ -1,4 +1,14 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
+
+const fs = require('fs');
+
+const getDocsDirs = () => {
+  return fs.readdirSync('./docs', { withFileTypes: true })
+    .flatMap(d => d.isFile() ? null: d.name)
+    .filter(v => v !== null);
+}
+
+
 module.exports = {
   title: 'Sample Tech Stats Website',
   tagline: 'Dinosaurs are cool',
@@ -23,18 +33,12 @@ module.exports = {
         src: 'img/logo.svg',
       },
       items: [
-        {
+        ...getDocsDirs().map(pj => ({
           type: 'doc',
-          docId: 'CulNetSensor/intro',
+          docId: `${pj}/intro`,
           position: 'left',
-          label: 'CulNet-Sensor',
-        },
-        {
-          type: 'doc',
-          docId: 'StraAnalysis/intro',
-          position: 'left',
-          label: 'Stra-Analysis',
-        },
+          label: `${pj}`,
+        })),
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
