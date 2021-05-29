@@ -65,7 +65,7 @@ conf
 
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
 ScriptConfig(input_dir='./data', output_dir='./output')
 </span>
@@ -88,7 +88,7 @@ lib.multiplot(data)
 
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
 &lt;Figure size 576x324 with 10 Axes&gt;
 </span>
@@ -116,7 +116,7 @@ pd.DataFrame(data)
 
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
    0   1   2   3   4   5   6   7   8   9
 0  0  10  20  30  40  50  60  70  80  90
@@ -154,7 +154,7 @@ data.cumsum()
 
 :::note Out
 <details>
-<summary>Details</summary>
+<summary>Details</summary>
 <span class='token-line'>
 array([   0,   10,   30,   60,  100,  150,  210,  280,  360,  450,  451,
         462,  483,  514,  555,  606,  667,  738,  819,  910,  912,  924,
