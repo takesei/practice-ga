@@ -41,6 +41,8 @@ jobs:
       - name: Create WebSite Structure
         run: |
           mkdir website/docs
+          echo $WEBSITE_TARGET_DIRECTORY
+          jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} echo {}
           jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY | xargs -I {} cp -r {} website/docs
           tree ./website
       - name: Convert Notebook into Markdown
