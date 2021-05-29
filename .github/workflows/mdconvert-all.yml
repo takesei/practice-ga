@@ -65,6 +65,7 @@ jobs:
           title: "[${{github.run_id}}] Changes by create-pull-request action"
           body: |
             Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action
+            
             ```
-            Build new document
+            Build new document, thanks to @${{ github.actor }}
             ```
