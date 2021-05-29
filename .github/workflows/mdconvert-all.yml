@@ -2,18 +2,6 @@ name: Convert All of the IPython Notebooks into Markdown
 on:
   workflow_dispatch:
     inputs:
-      target:
-        description: 'Target File (end with .ipynb)/ Directory'
-        required: true
-        default: 'AnalysisReport'
-      output_dir:
-        description: 'Output dir'
-        required: true
-        default: 'website/docs'
-      fig_dir_name:
-        description: 'Name of Figure Directory'
-        required: true
-        default: 'fig'
       website_config_file:
         description: 'Website Config'
         required: true
@@ -44,14 +32,20 @@ jobs:
           jq ".target.docs | .[]" ${{ github.event.inputs.website_config_file }} \
            | xargs -I {} cp -r {} website/docs
       - name: Convert Notebook into Markdown
+        working-directory: ./website/docs
+        env:
+          TARGET: ./
+          OUTPUT_DIR: ./
+          FIG_DIR_NAME: fig
         run: |
           python mdconverter/convert.py \
-            ${{ github.event.inputs.target }} \
-            ${{ github.event.inputs.output_dir }} \
-            ${{ github.event.inputs.fig_dir_name }}
+            ${{ env.TARGET }} \
+            ${{ env.OUTPUT_DIR }} \
+            ${{ env.FIG_DIR_NAME }}
       - name: Remove Unnecessary files (but markdown, gif, jpg, png)
+        working-directory: ./website/docs
         run: |
-          RUN find docs -type f \
+          RUN find . -type f \
           | grep -i -v -E '.*\.(md|jpg|jpeg|png|gif)' \
           | xargs -I {} rm -f {}
       - name: Get List
