@@ -1,0 +1,50 @@
+name: Deoploy Docusaurus
+
+on:
+  workflow_dispatch:
+    inputs:
+      website_config_file:
+        description: 'Website Config'
+        required: true
+        default: 'website.config.json'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Contents in Repo
+        uses: actions/checkout@v2
+      - name: Seup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Test & Build
+        working-directory: ./website
+        run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
+          npm run build
+      - name: Create SSH Connection
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
+      - name: Release to GitHub Pages
+        env:
+          USE_SSH: true
+          GIT_USER: git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "gh-actions"
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
+          npm run deploy
