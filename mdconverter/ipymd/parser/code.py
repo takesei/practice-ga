@@ -1,10 +1,16 @@
 import base64
 import re
-from typing import Dict, Any
+from typing import Any, Callable, Dict
 import jinja2
 
 
-def parse_code(meta: Dict[str, Any], template: jinja2.environment.Template, fig_dir_name='fig'):
+def parse_code(
+    meta: Dict[str, Any],
+    template: jinja2.environment.Template,
+    output_dir='./',
+    fig_dir_name='fig'
+) -> Callable[Dict[str, Any], str]:
+
     lang = meta['language_info']['name']
     style_css = re.compile(r"""<style(".*?"|'.*?'|[^'"])*?>.*?<\/style>""")
     style_inline_css = re.compile(r'style=".*?"')
@@ -41,7 +47,8 @@ def parse_code(meta: Dict[str, Any], template: jinja2.environment.Template, fig_
                     arg['text_plain_batch'].append(cont)
                 if 'image/png' in temp.keys():
                     name = f'{fig_dir_name}/{execution_count}-{counter}.png'
-                    with open(name, 'wb') as f:
+                    path = f'{output_dir}/{name}'
+                    with open(path, 'wb') as f:
                         f.write(base64.b64decode(temp['image/png']))
                     counter += 1
                     arg['image_png'].append(name)

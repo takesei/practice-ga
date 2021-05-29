@@ -35,12 +35,13 @@ class IPythonMD():
             nb = json.load(f)
 
         self.parsers = {
-            'code'    : parse_code(nb['metadata'], self.template['code'], fig_dir_name),
+            'code'    : parse_code(nb['metadata'], self.template['code'], output_dir, fig_dir_name),
             'markdown': parse_md(nb['metadata'], self.template['markdown']),
             'raw'     : parse_raw(nb['metadata'], self.template['raw'])
         }
 
-        os.makedirs(fig_dir_name, exist_ok=True)
+        os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(f'{output_dir}/{fig_dir_name}', exist_ok=True)
 
         temp = '\n'.join([self.parse_cell(i) for i in nb['cells']])
         with open(f'{output_dir}/{os.path.basename(target).split(".")[0]}.md', 'w') as f:
