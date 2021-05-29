@@ -16,13 +16,7 @@ ARG WEBSITE_DIRECTORY=website
 COPY ${WEBSITE_DIRECTORY}/yarn.lock ${WEBSITE_DIRECTORY}/package.json ${WORKDIR}
 RUN yarn install --frozen-lockfile
 
-ARG WEBSITE_TARGET_DIRECTORY="website.config.json"
-COPY . $WORKDIR
-RUN mv -f ${WEBSITE_DIRECTORY}/* . && \
-    rm -rf ${WEBSITE_DIRECTORY}
-RUN mkdir docs && \
-    jq ".target.docs | .[]" $WEBSITE_TARGET_DIRECTORY \
-      | xargs -I {} mv {} docs
+COPY $WEBSITE_DIRECTORY $WORKDIR
 
 RUN yarn run build && \
     yarn cache clean
