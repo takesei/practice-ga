@@ -33,17 +33,17 @@ def parse_code(
         counter = 0
         for i in outputs:
             if 'name' in i.keys():
-                cont = ''.join(i['text']).replace('<', '&lt;').replace('>', '&gt;')
+                cont = html_escape(''.join(i['text']))
                 arg[f'{i["name"]}_batch'].append(cont)
             elif 'ename' in i.keys():
-                tr = '\n'.join(i['traceback']).replace('<', '&lt;').replace('>', '&gt;')
-                val = i['evalue'].replace('<', '&lt;').replace('>', '&gt;')
+                tr = html_escape('\n'.join(i['traceback']))
+                val = html_escape(i['evalue'])
                 cont = {'ename': i['ename'], 'evalue': val, 'traceback': ansi_escape.sub('', tr)}
                 arg['error'].append(cont)
             elif 'data' in i.keys():
                 temp = i['data']
                 if 'text/plain' in temp.keys():
-                    cont = ''.join(temp['text/plain']).replace('<', '&lt;').replace('>', '&gt;')
+                    cont = html_escape(''.join(temp['text/plain']))
                     arg['text_plain_batch'].append(cont)
                 if 'image/png' in temp.keys():
                     name = f'{fig_dir_name}/{execution_count}-{counter}.png'
@@ -75,4 +75,16 @@ def snake_to_camel(txt: str):
     temp = txt.split('-')
     if len(temp) == 2:
         return temp[0] + temp[1].capitalize()
+    return txt
+
+
+def html_escape(txt: str):
+    exp = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '{': '&#123;',
+        '}': '&#125;',
+    }
+    for k, v in exp.items():
+        txt = txt.replace(k, v)
     return txt
