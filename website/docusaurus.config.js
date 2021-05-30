@@ -40,12 +40,8 @@ module.exports = {
           label: `${pj}`,
         })),
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/takesei/tech-stats',
           label: 'GitHub',
-          position: 'right',
-        },
-        {
-          type: 'search',
           position: 'right',
         },
       ],
@@ -54,33 +50,29 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Community',
+          title: 'About author',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'twitter',
+              href: 'https://twitter.com/honyamorake',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: 'Github',
+              href: 'https://github.com/takesei',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'About Project',
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/takesei/tech-stats',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Takesei nanachi Inc. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -92,7 +84,7 @@ module.exports = {
           // Please change this to your repo.
           routeBasePath: '/',
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/takesei/tech-stats/edit/master/website/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
