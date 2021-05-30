@@ -88,9 +88,9 @@ problem = ODEProblem(lotka_volterra!,u0,tspan,p)
 <details>
 <summary>Details</summary>
 <span class='token-line'>
-[36mODEProblem[0m with uType [36mVector{Float64}[0m and tType [36mFloat64[0m. In-place: [36mtrue[0m
+[36mODEProblem[0m with uType [36mVector&#123;Float64&#125;[0m and tType [36mFloat64[0m. In-place: [36mtrue[0m
 timespan: (0.0, 10.0)
-u0: 2-element Vector{Float64}:
+u0: 2-element Vector&#123;Float64&#125;:
  10.0
   7.0
 </span>
@@ -116,7 +116,7 @@ sol = solve(problem)
 <span class='token-line'>
 retcode: Success
 Interpolation: automatic order switching interpolation
-t: 29-element Vector{Float64}:
+t: 29-element Vector&#123;Float64&#125;:
   0.0
   0.0917949500250603
   0.23098607954364442
@@ -143,7 +143,7 @@ t: 29-element Vector{Float64}:
   9.433787876092625
   9.883287566369333
  10.0
-u: 29-element Vector{Vector{Float64}}:
+u: 29-element Vector&#123;Vector&#123;Float64&#125;&#125;:
  [10.0, 7.0]
  [9.820310837194686, 7.6518063884568654]
  [9.238473677011308, 8.580490971852772]
@@ -255,7 +255,7 @@ end a b c d
 <details>
 <summary>Details</summary>
 <span class='token-line'>
-(::LotkaVolterra{var"###ParameterizedDiffEqFunction#1516", var"###ParameterizedTGradFunction#1517", var"###ParameterizedJacobianFunction#1518", Nothing, Nothing, ODESystem}) (generic function with 1 method)
+(::LotkaVolterra&#123;var"###ParameterizedDiffEqFunction#1516", var"###ParameterizedTGradFunction#1517", var"###ParameterizedJacobianFunction#1518", Nothing, Nothing, ODESystem&#125;) (generic function with 1 method)
 </span>
 </details>
 :::
@@ -280,7 +280,7 @@ sol = solve(problem)
 <span class='token-line'>
 retcode: Success
 Interpolation: automatic order switching interpolation
-t: 29-element Vector{Float64}:
+t: 29-element Vector&#123;Float64&#125;:
   0.0
   0.0917949500250603
   0.23098607954364442
@@ -307,7 +307,7 @@ t: 29-element Vector{Float64}:
   9.433787876092625
   9.883287566369333
  10.0
-u: 29-element Vector{Vector{Float64}}:
+u: 29-element Vector&#123;Vector&#123;Float64&#125;&#125;:
  [10.0, 7.0]
  [9.820310837194686, 7.6518063884568654]
  [9.238473677011308, 8.580490971852772]
