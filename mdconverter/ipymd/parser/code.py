@@ -21,29 +21,27 @@ def parse_code(
         outputs = cell['outputs']
         execution_count = cell['execution_count']
         arg = {
-            'lang': lang,
-            'source_batch': ''.join(source),
+            'error': [],
+            'image_png': [],
+            'text_html': [],
+            'text_plain_batch': [],
             'stdout_batch': [],
             "stderr_batch": [],
-            'error': [],
-            'text_plain_batch': [],
-            'image_png': [],
-            'text_html': []
         }
         counter = 0
         for i in outputs:
             if 'name' in i.keys():
-                cont = html_escape(''.join(i['text']))
+                cont = ''.join(i['text'])
                 arg[f'{i["name"]}_batch'].append(cont)
             elif 'ename' in i.keys():
-                tr = html_escape('\n'.join(i['traceback']))
+                tr = '\n'.join(i['traceback'])
                 val = html_escape(i['evalue'])
                 cont = {'ename': i['ename'], 'evalue': val, 'traceback': ansi_escape.sub('', tr)}
                 arg['error'].append(cont)
             elif 'data' in i.keys():
                 temp = i['data']
                 if 'text/plain' in temp.keys():
-                    cont = html_escape(''.join(temp['text/plain']))
+                    cont = ''.join(temp['text/plain'])
                     arg['text_plain_batch'].append(cont)
                 if 'image/png' in temp.keys():
                     name = f'{fig_dir_name}/{execution_count}-{counter}.png'
@@ -67,7 +65,17 @@ def parse_code(
                     arg['text_html'].append(html)
             else:
                 print(f'##### No Hit!! ##### > {i}')
-        return template.render(arg)
+        fe = ''
+        for k, v in arg.items():
+            if len(v) != 0:
+                fe = k
+                break
+        return template.render({
+            'lang': lang,
+            'source_batch': ''.join(source),
+            'output': arg if sum([len(i) for i in arg.values()]) != 0 else {},
+            'first_element': fe
+        })
     return inner
 
 

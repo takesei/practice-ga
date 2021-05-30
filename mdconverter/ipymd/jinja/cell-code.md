@@ -2,59 +2,81 @@
 {{ source_batch }}
 ```
 
-{% if stdout_batch != [] %}
-{% for out in stdout_batch %}
+{% if output|length > 0 -%}
+<Tabs
+defaultValue='{{ first_element }}'
+values={[
+{% for k, v in output.items() -%}
+{% if v != [] -%}
+{% if k == "stdout_batch" -%}
+{label: "STDOUT", value: '{{ k }}'},
+{% elif k == "stderr_batch" -%}
+{label: "STDERR", value: '{{ k }}'},
+{% elif k == "error" -%}
+{label: "ERROR", value: '{{ k }}'},
+{% elif k == "text_plain_batch" -%}
+{label: "[Out]", value: '{{ k }}'},
+{% elif k == "image_png" -%}
+{label: "Image", value: '{{ k }}'},
+{% elif k == "text_html" -%}
+{label: "HTML", value: '{{ k }}'},
+{% endif -%}
+{% endif -%}
+{% endfor -%}
+]}>
+
+{% for k, v in output.items() -%}
+{% if v != [] -%}
+<TabItem value='{{ k }}'>
+{% if k == "stdout_batch" -%}
+{% for cont in v %}
 :::info STDOUT
 ```text
-{{ out }}
+{{ cont }}
 ```
 :::
-{% endfor %}
-{% endif %}{% if stderr_batch != [] %}
-{% for err in stderr_batch %}
+{% endfor -%}
+{% elif k == "stderr_batch" -%}
+{% for cont in v %}
 :::caution STDERR
 ```text
-{{ err }}
+{{ cont }}
 ```
 :::
-{% endfor %}
-{% endif %}{% if error != [] %}
-{% for e in error %}
-:::danger {{ e.ename }}
-> {{ e.evalue }}
-
+{% endfor -%}
+{% elif k == "error" -%}
+{% for cont in v %}
+:::danger {{ cont.ename }}
 ```text 
-{{ e.traceback }}
+{{ cont.traceback }}
 ```
 :::
-{% endfor %}
-{% endif %}
-
-{% if text_plain_batch != [] %}
-{% for txt in text_plain_batch %}
+{% endfor -%}
+{% elif k == "text_plain_batch" -%}
+{% for cont in v %}
 :::note Out
-<details>
-<summary>Details</summary>
-<span class='token-line'>
-{{ txt }}
-</span>
-</details>
+```text
+{{ cont }}
+```
 :::
-{% endfor %}
-{% endif %}
-
-{% if image_png != [] %}
-{% for img in image_png %}
+{% endfor -%}
+{% elif k == "image_png" -%}
+{% for cont in v %}
 :::note Image
-![{{ img|safe }}]({{ img|safe }})
+![{{ cont|safe }}]({{ cont|safe }})
 :::
-{% endfor %}
-{% endif %}{% if text_html != [] %}
-{% for html in text_html %}
+{% endfor -%}
+{% elif k == "text_html" -%}
+{% for cont in v %}
 :::note HTML
-{{ html }}
+{{ cont }}
 :::
-{% endfor %}
+{% endfor -%}
+{% endif -%}
+</TabItem>
+{% endif -%}
+{% endfor -%}
+</Tabs>
 {% endif %}
 
 ---
