@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Analysis Report: test[test]
 - date: 2021/5/26
 - author: takesei
@@ -14,7 +17,13 @@ Test converting ipynb to markdown
 !pip install -r requirements.txt
 ```
 
+<Tabs
+defaultValue='stdout_batch'
+values={[
+{label: "STDOUT", value: 'stdout_batch'},
+]}>
 
+<TabItem value='stdout_batch'>
 
 :::info STDOUT
 ```text
@@ -22,11 +31,8 @@ Requirement already satisfied: numpy==1.20.3 in /opt/conda/lib/python3.9/site-pa
 
 ```
 :::
-
-
-
-
-
+</TabItem>
+</Tabs>
 
 
 ---
@@ -44,10 +50,6 @@ import mylib as lib
 
 
 
-
-
-
-
 ---
 ```python
 class ScriptConfig(NamedTuple):
@@ -61,37 +63,34 @@ os.makedirs(conf.output_dir, exist_ok=True)
 
 
 
-
-
-
-
 ---
 ```python
 data = np.arange(100).reshape(10, -10).T
 lib.multiplot(data)
 ```
 
+<Tabs
+defaultValue='image_png'
+values={[
+{label: "Image", value: 'image_png'},
+{label: "[Out]", value: 'text_plain_batch'},
+]}>
 
-
-
-
-:::note Out
-<details>
-<summary>Details</summary>
-<span class='token-line'>
-&lt;Figure size 576x324 with 10 Axes&gt;
-</span>
-</details>
-:::
-
-
-
-
+<TabItem value='image_png'>
 
 :::note Image
 ![fig/4-0.png](fig/4-0.png)
 :::
+</TabItem>
+<TabItem value='text_plain_batch'>
 
+:::note Out
+```text
+<Figure size 576x324 with 10 Axes>
+```
+:::
+</TabItem>
+</Tabs>
 
 
 ---
