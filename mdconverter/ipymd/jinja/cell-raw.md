@@ -1,4 +1,4 @@
-{% for line in source %}
+{% for line in source -%}
 > {{ line }}
 {% endfor %}
 
