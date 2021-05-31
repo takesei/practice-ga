@@ -1,11 +1,13 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-
 const fs = require('fs');
+const config = require('./website.config.json')
 
 const getDocsDirs = () => {
-  return fs.readdirSync('./docs', { withFileTypes: true })
+  let docsDir = fs.readdirSync('./docs', { withFileTypes: true })
     .flatMap(d => d.isFile() ? null: d.name)
     .filter(v => v !== null);
+  let diff = docsDir.filter(x => !config.target.docs.includes(x));
+  return config.target.docs.concat(diff);
 }
 
 
@@ -26,10 +28,10 @@ module.exports = {
       additionalLanguages: ['python', 'julia', 'r', 'markdown']
     },
     navbar: {
-      title: 'My Site',
+      title: 'Tech Stats',
       hideOnScroll: true,
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Site Logo',
         src: 'img/logo.svg',
       },
       items: [
