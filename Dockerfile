@@ -48,6 +48,8 @@ COPY $WEBSITE_DIRECTORY $WORKDIR
 RUN rm -rf docs/
 COPY --from=conv /app/target/ /app/docs/
 
+COPY $WEBSITE_TARGET_DIRECTORY $WORKDIR
+
 RUN yarn run build && \
     yarn cache clean
 
