@@ -1,2 +1,2 @@
 # practice-ga
-Practice of GA making a document
+Practice of GA making a document.
